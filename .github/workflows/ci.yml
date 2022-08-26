@@ -30,8 +30,6 @@ jobs:
             artifact_suffix: linux-x86_64
             target_arch: amd64
             target_os: linux
-    env:
-      DESTDIR: ./${{ matrix.artifact_suffix }}
     steps:
       - name: Set up access
         uses: actions/checkout@v2
@@ -55,6 +53,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: aerc-${{ matrix.artifact_suffix }}.tar.gz
+          files: mop-${{ matrix.artifact_suffix }}.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
