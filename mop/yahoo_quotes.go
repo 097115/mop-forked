@@ -155,8 +155,58 @@ func (quotes *Quotes) parse2(body []byte) (*Quotes, error) {
 			default:
 				result[k] = fmt.Sprintf("%v", v)
 			}
-
 		}
+
+		// rename special tickers
+		if strings.Contains(result["symbol"], "=") || strings.Contains(result["symbol"], "-") {
+			if result["symbol"][3:] == "=X" {
+				result["symbol"] = "USD" + result["symbol"]
+			}
+			switch {
+			// currencies
+			case strings.Contains(result["symbol"], "-USD"),
+				strings.Contains(result["symbol"], "-EUR"):
+				result["symbol"] = "$" + result["symbol"]
+			case strings.HasSuffix(result["symbol"], "=X"):
+				result["symbol"] = result["symbol"][:len(result["symbol"]) - 2]
+				result["symbol"] = "$" + result["symbol"][:3] + "-" + result["symbol"][3:]
+			// metals
+			case strings.Contains(result["symbol"], "GC="),
+				strings.Contains(result["symbol"], "PL="),
+				strings.Contains(result["symbol"], "PA="),
+				strings.Contains(result["symbol"], "SI="),
+				strings.Contains(result["symbol"], "HG="):
+				result["symbol"] = "&" + result["symbol"]
+			// energy
+			case strings.Contains(result["symbol"], "BZ="),
+				strings.Contains(result["symbol"], "CL="):
+				result["symbol"] = "*" + result["symbol"]
+			// food
+			case strings.Contains(result["symbol"], "ZC="),		// corn
+				strings.Contains(result["symbol"], "ZO="), 		// oat
+				strings.Contains(result["symbol"], "KE="), 		// wheat
+				strings.Contains(result["symbol"], "ZR="), 		// rice
+				strings.Contains(result["symbol"], "ZM="), 		// soybean meal
+				strings.Contains(result["symbol"], "CC="): 		// cocoa
+				result["symbol"] = "@" + result["symbol"]
+			// indices
+			case strings.Contains(result["symbol"], "ES="),		// S&P Futures
+				strings.Contains(result["symbol"], "NQ="), 		// Nasdaq Futures
+				strings.Contains(result["symbol"], "RTY="),		// Russell 2000 Futures
+				strings.Contains(result["symbol"], "YM="): 		// Dow Futures
+				result["symbol"] = "!" + result["symbol"]
+			default:
+			}
+		}
+		switch {
+		// ETFs
+		case strings.Contains(result["symbol"], "DIA"),			// SDPR Dow Jones Industrial Average ETF
+			strings.Contains(result["symbol"], "IWM"), 			// iShares Russell 2000 ETF
+			strings.Contains(result["symbol"], "QQQ"), 			// Invesco QQQ ETF
+			strings.Contains(result["symbol"], "SPY"): 			// SPDR S&P 500 ETF
+			result["symbol"] = "#" + result["symbol"]
+		}
+
 		quotes.stocks[i].Ticker = result["symbol"]
 		quotes.stocks[i].LastTrade = result["regularMarketPrice"]
 		quotes.stocks[i].Change = result["regularMarketChange"]

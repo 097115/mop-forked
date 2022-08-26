@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/eiannone/keyboard"
-	"github.com/mop-tracker/mop"
+	"mop-forked/mop"
 	"github.com/nsf/termbox-go"
 )
 

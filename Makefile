@@ -2,21 +2,20 @@
 # Use of this source code is governed by a MIT-style license that can
 # be found in the LICENSE file.
 
-VERSION = 1.0.0
-PACKAGE = ./cmd/mop
-
-run:
-	go run ./cmd/mop/main.go
+VERSION = 1.0.0-forked-20220825
 
 build:
-	go build -x -o ./bin/mop $(PACKAGE)
+	go build -x -o ./mop-$(shell go env GOOS)-$(shell go env GOARCH)
 
 install:
-	go install -x $(PACKAGE)
+	go install -x
 
 buildall:
-	GOOS=darwin  GOARCH=amd64 go build $(GOFLAGS) -o ./bin/mop-$(VERSION)-osx-64         $(PACKAGE)
-	GOOS=freebsd GOARCH=amd64 go build $(GOFLAGS) -o ./bin/mop-$(VERSION)-freebsd-64     $(PACKAGE)
-	GOOS=linux   GOARCH=amd64 go build $(GOFLAGS) -o ./bin/mop-$(VERSION)-linux-64       $(PACKAGE)
-	GOOS=windows GOARCH=amd64 go build $(GOFLAGS) -o ./bin/mop-$(VERSION)-windows-64.exe $(PACKAGE)
-	GOOS=windows GOARCH=386   go build $(GOFLAGS) -o ./bin/mop-$(VERSION)-windows-32.exe $(PACKAGE)
+	GOOS=darwin  GOARCH=amd64 go build $(GOFLAGS) -o ./mop-$(VERSION)-osx-64
+	GOOS=freebsd GOARCH=amd64 go build $(GOFLAGS) -o ./mop-$(VERSION)-freebsd-64
+	GOOS=linux   GOARCH=386   go build $(GOFLAGS) -o ./mop-$(VERSION)-linux-32
+	GOOS=linux   GOARCH=amd64 go build $(GOFLAGS) -o ./mop-$(VERSION)-linux-64
+	GOOS=windows GOARCH=amd64 go build $(GOFLAGS) -o ./mop-$(VERSION)-windows-64.exe
+	GOOS=windows GOARCH=386   go build $(GOFLAGS) -o ./mop-$(VERSION)-windows-32.exe
+
+.PHONY: build buildall
