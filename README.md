@@ -1,9 +1,18 @@
-### mop: track stocks the hacker way
+mop-tracker
+===========
+
+## About
+
+This is a fork of [`mop-tracker`](https://github.com/mop-tracker/mop) with some insignificant tweaks. All the credits go to the original authors. The original README follows.
+
+<hr />
+
+## mop: track stocks the hacker way
 A command-line utility that displays continuous up-to-date information about select markets and individual stocks.
 
 ![image](https://user-images.githubusercontent.com/12674437/144474220-5f35f893-6860-4ba5-9c3a-58b80df16255.png)
 
-### Installing mop from source
+## Installing mop from source
 
 Ensure GO language is installed. Download from: https://go.dev/dl/ and the $GOPATH is set then:
 
@@ -14,7 +23,7 @@ go build ./cmd/mop
 ./mop
 ```
 
-### Using mop
+## Using mop
 For demonstration purposes Mop comes preconfigured with a number of stock tickers. You can easily change the default list by using the following keyboard commands:
 
     +       Add stocks to the list.
@@ -30,7 +39,7 @@ For demonstration purposes Mop comes preconfigured with a number of stock ticker
 
 When prompted please enter comma-delimited list of stock tickers. The list and other settings are stored in the profile file (default: ``.moprc`` in your ``$HOME`` directory)
 
-### Expression-based Filtering
+## Expression-based Filtering
 Mop has an in realtime expression-based filtering engine that is very easy to use.
 
 At the main screen, press `f` and a prompt will appear. Write an expression that uses the stock properties.
@@ -51,14 +60,14 @@ To clear the filter, press `Shift+F`.
 
 You can specify the profile you want to use by passing ``-profile <filename>`` to the command-line.
 
-### Saving & Downloading to CSV
+## Saving & Downloading to CSV
 Please refer to the wiki by contributor @joce: [How to fetch market data from Yahoo! Finance in CSV form, from the command line](https://github.com/mop-tracker/mop/wiki/How-to-fetch-market-data-from-Yahoo!-Finance-in-CSV-form,-from-the-command-line).
 Further information may be found in the following article: [Pulling Yahoo! Finance data to CSV](https://jocelyn.legau.lt/posts/pulling-yahoo-finance-tickers-to-csv/)
 
-### Contributing
+## Contributing
 * Pull requests accepted.
 
-### License
+## License
 Copyright (c) 2013-2019 by Michael Dvorkin and contributors. All Rights Reserved.
 "mike" + "@dvorkin" + ".net" || "twitter.com/mid"
 
