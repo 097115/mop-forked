@@ -211,7 +211,7 @@ func (layout *Layout) pad(str string, width int) string {
 func buildMarketTemplate() *template.Template {
 	markup := `<tag>Dow</> {{.Dow.change}} ({{.Dow.percent}}) at {{.Dow.latest}} <tag>S&P 500</> {{.Sp500.change}} ({{.Sp500.percent}}) at {{.Sp500.latest}} <tag>NASDAQ</> {{.Nasdaq.change}} ({{.Nasdaq.percent}}) at {{.Nasdaq.latest}}
 <tag>Tokyo</> {{.Tokyo.change}} ({{.Tokyo.percent}}) at {{.Tokyo.latest}} <tag>HK</> {{.HongKong.change}} ({{.HongKong.percent}}) at {{.HongKong.latest}} <tag>London</> {{.London.change}} ({{.London.percent}}) at {{.London.latest}} <tag>Frankfurt</> {{.Frankfurt.change}} ({{.Frankfurt.percent}}) at {{.Frankfurt.latest}} {{if .IsClosed}}<right>U.S. markets closed</right>{{end}}
-<tag>10-Year Yield</> {{.Yield.latest}} ({{.Yield.change}})`
+<tag>10-Year Yield</> {{.Yield.latest}}`
 
 	return template.Must(template.New(`market`).Parse(markup))
 }
